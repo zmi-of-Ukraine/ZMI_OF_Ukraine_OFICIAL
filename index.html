@@ -5,85 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>МОЗ — Міністерство охорони здоров'я</title>
   <style>
-    /* Базові стилі */
+    /* Базові стилі та кольори */
+    :root {
+      --moz-green: #2e7d32;
+      --moz-yellow: #ffeb3b;
+      --moz-bg: #f9fbf9;
+      --white: #ffffff;
+    }
+
     * { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9fbf9;
+      background: var(--moz-bg);
       color: #2b2b2b;
       margin: 0;
-      padding: 0 15px 40px;
-      max-width: 960px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 0 0 40px 0;
       line-height: 1.65;
     }
 
+    /* ШАПКА САЙТУ */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #2e7d32;
-      padding: 18px 25px;
+      background-color: var(--moz-green);
+      padding: 15px 10%;
       color: white;
       border-radius: 0 0 14px 14px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+      box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
-    header .logo {
+    .logo {
       font-weight: 900;
-      font-size: 1.6em;
-      font-family: 'Arial Black', sans-serif;
-      color: #ffeb3b;
+      font-size: 1.8em;
+      color: var(--moz-yellow);
+      text-transform: uppercase;
     }
 
-    nav { display: flex; align-items: center; gap: 10px; }
-    nav a, .btn-login {
-      color: #ffffff;
+    nav { display: flex; gap: 15px; }
+    .nav-link {
+      color: white;
       text-decoration: none;
       font-weight: 700;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
       transition: 0.3s;
       cursor: pointer;
-      border: none;
-      background: transparent;
     }
-    nav a:hover, .btn-login:hover { background-color: #ffeb3b; color: #2e7d32; }
-    nav a.active { background-color: #ffeb3b; color: #2e7d32; }
+    .nav-link.active { background-color: var(--moz-yellow); color: var(--moz-green); }
+    .nav-link:hover:not(.active) { background-color: rgba(255, 255, 255, 0.1); }
 
-    /* Контентні блоки */
-    .page-section { display: none; background: white; padding: 30px; border-radius: 18px; box-shadow: 0 7px 25px rgba(0,0,0,0.05); }
-    .active-section { display: block; }
+    .container { max-width: 900px; margin: 20px auto; padding: 0 20px; }
 
-    /* Форми та кнопки */
-    .form-group { margin-bottom: 15px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; }
-    input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e8f5e9; border-radius: 8px; outline: none; }
-    input:focus { border-color: #2e7d32; }
-    .btn-submit { background: #2e7d32; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+    /* ПОШУК */
+    .search-input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-size: 1em;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
 
-    /* Таблиця адміна */
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
-    th { background: #f1f8e9; color: #2e7d32; }
-
+    /* НОВИНИ */
+    #newsContainer { display: flex; flex-direction: column; gap: 25px; }
+    
     .news-item {
-      background: #ffffff;
-      padding: 25px;
+      background: var(--white);
+      padding: 30px;
       border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-left: 6px solid #ffeb3b;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-left: 8px solid var(--moz-yellow);
+      transition: 0.3s;
+    }
+    .news-item:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    
+    .news-title { font-size: 1.6em; font-weight: 800; color: #1b5e20; margin: 0 0 10px 0; }
+    .news-date { font-size: 0.9em; color: #888; margin-bottom: 15px; }
+    .news-tag {
+      background: #e8f5e9; color: var(--moz-green);
+      padding: 4px 12px; border-radius: 6px;
+      font-size: 0.8em; font-weight: 700; margin-right: 8px;
+    }
+    .news-text { font-size: 1.1em; color: #444; margin-top: 15px; }
+    .news-text a { color: var(--moz-green); font-weight: bold; text-decoration: underline; word-break: break-all; }
+
+    /* СТОРІНКА ПРО НАС */
+    #aboutPage {
+      display: none;
+      background: var(--white);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .highlight-box {
+      background: var(--moz-green);
+      color: var(--moz-yellow);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+      font-weight: 800;
       margin-bottom: 20px;
     }
 
-    .highlight { background: #2e7d32; color: #ffeb3b; padding: 8px 16px; border-radius: 10px; font-weight: 800; display: inline-block; margin-bottom: 20px; }
-
-    footer { margin-top: 40px; text-align: center; color: #666; font-size: 0.9em; }
+    footer { text-align: center; padding: 40px 0; color: #888; font-size: 0.9em; border-top: 1px solid #eee; margin-top: 40px; }
   </style>
 </head>
 <body>
@@ -91,196 +120,98 @@
 <header>
   <div class="logo">МОЗ УКРАЇНИ</div>
   <nav>
-    <a href="#" onclick="showSection('home')" id="nav-home" class="active">Головна</a>
-    <a href="#" onclick="showSection('about')" id="nav-about">Про нас</a>
-    <a href="#" onclick="showSection('appointment')" id="nav-appointment">Запис</a>
-    <button class="btn-login" id="admin-btn" onclick="toggleAdmin()">Увійти до кабінету</button>
+    <a id="linkHome" class="nav-link active" onclick="showHome()">Головна</a>
+    <a id="linkAbout" class="nav-link" onclick="showAbout()">Про нас</a>
   </nav>
 </header>
 
-<div id="section-home" class="page-section active-section">
-  <h1>Новини медицини</h1>
-  <div class="news-item">
-    <h2 style="color: #1b5e20; margin-top:0;">Офіційне призначення: У нас новий головний лікар</h2>
-    <div style="font-size: 0.9em; color: #666; margin-bottom: 15px;">19 січня 2026 року</div>
-    <p>Сьогодні Олександра Янковича було офіційно представлено колективу. Пріоритетом роботи стане модернізація відділень та цифровізація послуг.</p>
+<div class="container">
+  <div id="homePage">
+    <input type="text" class="search-input" placeholder="Пошук новин медицини...">
+    <div id="newsContainer">
+      </div>
   </div>
-</div>
 
-<div id="section-about" class="page-section">
-  <h1>Про установу</h1>
-  <div class="highlight">Керівний склад</div>
-  <p><strong>Головний лікар:</strong> Олександр Янкович</p>
-  <p><strong>Головний відділення:</strong> Єгор Лисенко</p>
-  <hr>
-  <p>Ми забезпечуємо контроль якості медичних послуг та впровадження нових стандартів лікування в Україні.</p>
-</div>
-
-<div id="section-appointment" class="page-section">
-  <h1>Електронна черга</h1>
-  <p>Заповніть анкету для отримання направлення до фахівця.</p>
-  <div id="appointment-form">
-    <div class="form-group">
-      <label>Ваше ПІБ:</label>
-      <input type="text" id="p-name" placeholder="Іванов Іван Іванович">
-    </div>
-    <div class="form-group">
-      <label>Оберіть симптом (Тест):</label>
-      <select id="p-symptom">
-        <option value="Загальне нездужання">Загальне нездужання</option>
-        <option value="Кардіологія (серце)">Біль у грудній клітці</option>
-        <option value="Хірургія">Травма або сильний біль</option>
-        <option value="Консультація">Потрібна консультація керівництва</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Контактний телефон:</label>
-      <input type="tel" id="p-phone" placeholder="+380...">
-    </div>
-    <button class="btn-submit" onclick="submitForm()">Надіслати заявку</button>
+  <div id="aboutPage">
+    <div class="highlight-box">Міністерство охорони здоров'я України</div>
+    <h1>Про установу</h1>
+    <p>Ми забезпечуємо реалізацію державної політики у сфері охорони здоров’я та контроль якості медичних послуг.</p>
+    
+    <h3>Керівництво:</h3>
+    <ul>
+      <li><strong>Головний лікар:</strong> Олександр Янкович</li>
+      <li><strong>Головний відділення:</strong> Єгор Лисенко</li>
+    </ul>
+    <p>Під керівництвом Олександра Янковича ми впроваджуємо сучасні цифрові рішення для зручності пацієнтів.</p>
   </div>
-  <div id="success-msg" style="display:none; text-align: center; color: #2e7d32;">
-    <h3>✅ Заявку надіслано! Очікуйте на направлення в кабінеті адміна.</h3>
-  </div>
-</div>
-
-<div id="section-admin" class="page-section">
-  <h1>Кабінет адміністратора / Лікаря</h1>
-  <p>Управління записами пацієнтів та направлення до спеціалістів.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>Пацієнт</th>
-        <th>Скарга</th>
-        <th>Телефон</th>
-        <th>Призначити лікаря</th>
-        <th>Дія</th>
-      </tr>
-    </thead>
-    <tbody id="admin-table-body">
-      </tbody>
-  </table>
-  <button class="btn-submit" style="margin-top:20px; background:#666;" onclick="logout()">Вийти з кабінету</button>
 </div>
 
 <footer>
-  <p>© 2026 МОЗ України. Головний лікар: Олександр Янкович.</p>
+  <p>© 2026 МОЗ України. Офіційний портал.</p>
 </footer>
 
 <script>
-  // ==========================================
-  // КОНФІГУРАЦІЯ СПЕЦІАЛІСТІВ (Додавайте сюди)
-  // ==========================================
-  const doctorsList = [
-    "Олександр Янкович (Головний лікар)",
-    "Єгор Лисенко (Головний відділення)",
-    "Петренко В. (Терапевт)",
-    "Сидоренко А. (Хірург)"
+  // Дані новин в одному масиві
+  const newsData = [
+    {
+      title: "Офіційне призначення: У нас новий головний лікар",
+      date: "19.01.2026",
+      tags: ["Призначення", "Важливо"],
+      text: "Сьогодні офіційно представлено нового головного лікаря установи. Ним став Олександр Янкович. Колектив вітає нового керівника та готується до впровадження нових медичних стандартів."
+    },
+    {
+      title: "Запис до лікаря",
+      date: "19.01.2026",
+      tags: ["Записи", "Важливо"],
+      text: "https://forms.gle/UjfVVPRXSwH4k4nY8"
+    },
+    {
+      title: "Запис до лікаря: результати",
+      date: "19.01.2026",
+      tags: ["Записи", "Результати", "Важливо"],
+      text: "https://docs.google.com/spreadsheets/d/1rV90J5ZXRNG5DFbMR6IsRW1DCvOi2446DPYk8w4nMWY/edit?usp=sharing"
+    }
   ];
 
-  let appointments = []; // База заявок
-  let isAdmin = false;
+  function renderNews() {
+    const container = document.getElementById('newsContainer');
+    container.innerHTML = '';
 
-  // Навігація
-  function showSection(id) {
-    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    
-    document.getElementById('section-' + id).classList.add('active-section');
-    if(document.getElementById('nav-' + id)) {
-      document.getElementById('nav-' + id).classList.add('active');
-    }
-  }
-
-  // Авторизація
-  function toggleAdmin() {
-    if (!isAdmin) {
-      let pass = prompt("Введіть пароль адміністратора:");
-      if (pass === "admin" || pass === "1234") {
-        isAdmin = true;
-        document.getElementById('admin-btn').innerText = "Мій Кабінет";
-        renderAdminTable();
-        showSection('admin');
-      } else {
-        alert("Невірний пароль!");
+    newsData.forEach(item => {
+      // Перетворюємо посилання на клікабельні
+      let processedText = item.text;
+      if (item.text.startsWith('http')) {
+        processedText = `<a href="${item.text}" target="_blank">${item.text}</a>`;
       }
-    } else {
-      showSection('admin');
-    }
-  }
 
-  function logout() {
-    isAdmin = false;
-    document.getElementById('admin-btn').innerText = "Увійти до кабінету";
-    showSection('home');
-  }
-
-  // Робота з формою запису
-  function submitForm() {
-    const name = document.getElementById('p-name').value;
-    const symptom = document.getElementById('p-symptom').value;
-    const phone = document.getElementById('p-phone').value;
-
-    if (!name || !phone) { alert("Заповніть усі поля!"); return; }
-
-    const newApp = {
-      id: Date.now(),
-      name, symptom, phone,
-      assignedDoctor: "Не призначено",
-      status: "Очікує"
-    };
-
-    appointments.push(newApp);
-    document.getElementById('appointment-form').style.display = 'none';
-    document.getElementById('success-msg').style.display = 'block';
-
-    setTimeout(() => {
-      document.getElementById('appointment-form').reset();
-      document.getElementById('appointment-form').style.display = 'block';
-      document.getElementById('success-msg').style.display = 'none';
-      showSection('home');
-    }, 2000);
-  }
-
-  // Рендер таблиці адміна
-  function renderAdminTable() {
-    const tbody = document.getElementById('admin-table-body');
-    tbody.innerHTML = '';
-
-    appointments.forEach(app => {
-      let doctorOptions = doctorsList.map(doc => `<option value="${doc}">${doc}</option>`).join('');
-      
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${app.name}</td>
-        <td>${app.symptom}</td>
-        <td>${app.phone}</td>
-        <td>
-          <select id="select-${app.id}">
-            <option>-- Оберіть лікаря --</option>
-            ${doctorOptions}
-          </select>
-        </td>
-        <td>
-          <button onclick="assignDoctor(${app.id})" style="background:#2e7d32; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">Направити</button>
-        </td>
+      const article = document.createElement('article');
+      article.className = 'news-item';
+      article.innerHTML = `
+        <div class="news-title">${item.title}</div>
+        <div class="news-date">${item.date}</div>
+        <div>${item.tags.map(t => `<span class="news-tag">${t}</span>`).join('')}</div>
+        <div class="news-text">${processedText}</div>
       `;
-      tbody.appendChild(tr);
+      container.appendChild(article);
     });
-
-    if (appointments.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Нових записів немає</td></tr>';
-    }
   }
 
-  function assignDoctor(id) {
-    const doctor = document.getElementById('select-' + id).value;
-    if (doctor.includes("--")) { alert("Оберіть лікаря!"); return; }
-    
-    alert(`Пацієнта успішно направлено до: ${doctor}`);
-    appointments = appointments.filter(a => a.id !== id); // Видаляємо з черги після направлення
-    renderAdminTable();
+  function showHome() {
+    document.getElementById('homePage').style.display = 'block';
+    document.getElementById('aboutPage').style.display = 'none';
+    document.getElementById('linkHome').classList.add('active');
+    document.getElementById('linkAbout').classList.remove('active');
   }
+
+  function showAbout() {
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('aboutPage').style.display = 'block';
+    document.getElementById('linkHome').classList.remove('active');
+    document.getElementById('linkAbout').classList.add('active');
+  }
+
+  // Запуск при завантаженні
+  renderNews();
 </script>
 
 </body>
